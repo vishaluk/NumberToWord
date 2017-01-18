@@ -28,4 +28,31 @@ public class NumberToWordTest {
         numMap.forEach((key,val) -> assertTrue(numberToWord.toWord(key).equals(val)));
     }
 
+    @Test
+    public void testDoubleDigits(){
+        NumberToWord numberToWord = new NumberToWord();
+        Map<Integer, String> numMap = new HashMap<Integer, String>();
+        numMap.put(10, "ten");
+        numMap.put(11, "eleven");
+        numMap.put(12, "twelve");
+        numMap.put(13, "thirteen");
+        numMap.put(14, "fourteen");
+        numMap.put(15, "fifteen");
+        numMap.put(16, "sixteen");
+        numMap.put(17, "seventeen");
+        numMap.put(18, "eighteen");
+        numMap.put(19, "nineteen");
+        numMap.put(20, "twenty");
+        numMap.put(21, "twenty one");
+        numMap.put(22, "twenty two");
+        numMap.put(23, "twenty three");
+        numMap.put(24, "twenty four");
+        numMap.put(25, "twenty five");
+        numMap.put(26, "twenty six");
+        numMap.put(27, "twenty seven");
+        numMap.put(28, "twenty eight");
+        numMap.put(29, "twenty nine");
+        numMap.forEach((key,val) -> assertTrue(numberToWord.toWord(key).equals(val)));
+    }
+
 }
