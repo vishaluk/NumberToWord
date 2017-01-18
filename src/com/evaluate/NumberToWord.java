@@ -7,23 +7,52 @@ import java.util.Map;
  * Created by vishalsharma on 18/01/2017.
  */
 public class NumberToWord {
-    private Map<Integer, String> singleDigitsMap;
+    private Map<Integer, String> digitsMap;
+    private Map<Integer, String> tensMap;
 
     public NumberToWord(){
-        // initialisation of single digits
-        singleDigitsMap = new HashMap<>();
-        singleDigitsMap.put(1, "one");
-        singleDigitsMap.put(2, "two");
-        singleDigitsMap.put(3, "three");
-        singleDigitsMap.put(4, "four");
-        singleDigitsMap.put(5, "five");
-        singleDigitsMap.put(6, "six");
-        singleDigitsMap.put(7, "seven");
-        singleDigitsMap.put(8, "eight");
-        singleDigitsMap.put(9, "nine");
+        // initialisation of digitsMap containing numbers less than 20
+        digitsMap = new HashMap<>();
+        digitsMap.put(1, "one");
+        digitsMap.put(2, "two");
+        digitsMap.put(3, "three");
+        digitsMap.put(4, "four");
+        digitsMap.put(5, "five");
+        digitsMap.put(6, "six");
+        digitsMap.put(7, "seven");
+        digitsMap.put(8, "eight");
+        digitsMap.put(9, "nine");
+        digitsMap.put(10, "ten");
+        digitsMap.put(11, "eleven");
+        digitsMap.put(12, "twelve");
+        digitsMap.put(13, "thirteen");
+        digitsMap.put(14, "fourteen");
+        digitsMap.put(15, "fifteen");
+        digitsMap.put(16, "sixteen");
+        digitsMap.put(17, "seventeen");
+        digitsMap.put(18, "eighteen");
+        digitsMap.put(19, "nineteen");
+
+        // initialisation of tens when number is greater than or equal to 20
+        tensMap = new HashMap<>();
+        tensMap.put(2, "twenty");
+
     }
 
     public String toWord(int number){
-        return singleDigitsMap.get(number);
+        if (number < 20) {
+            return digitsMap.get(number);
+        } else {
+            int firstDigit, secondDigit;
+            secondDigit = number % 10;
+            firstDigit = number / 10;
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(tensMap.get(firstDigit));
+            if (digitsMap.get(secondDigit)!=null){
+                stringBuilder.append(" ")
+                        .append(digitsMap.get(secondDigit));
+            }
+            return stringBuilder.toString();
+        }
     }
 }
