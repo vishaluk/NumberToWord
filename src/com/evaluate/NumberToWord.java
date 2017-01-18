@@ -90,6 +90,12 @@ public class NumberToWord {
         }
     }
 
+    public static void main(String[] args) {
+        Integer numberInput = Integer.parseInt(args[0]);
+        NumberToWord numberToWord = new NumberToWord();
+        System.out.println(numberToWord.toWord(numberInput));
+    }
+
 
 
     public String toWord(int number){
