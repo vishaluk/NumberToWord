@@ -135,6 +135,7 @@ public class NumberToWordTest {
         NumberToWord numberToWord = new NumberToWord();
         assertTrue(numberToWord.toWord(5145000).equals("five million one hundred and forty-five thousand"));
         assertTrue(numberToWord.toWord(7100000).equals("seven million one hundred thousand"));
+        assertTrue(numberToWord.toWord(45001000).equals("forty-five million one thousand"));
         assertTrue(numberToWord.toWord(22100001).equals("twenty-two million one hundred thousand and one"));
         assertTrue(numberToWord.toWord(999999999).equals("nine hundred and ninety-nine million nine hundred and ninety-nine thousand nine hundred and ninety-nine"));
     }
