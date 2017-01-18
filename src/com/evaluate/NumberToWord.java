@@ -1,7 +1,11 @@
 package com.evaluate;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 /**
  * Created by vishalsharma on 18/01/2017.
@@ -9,6 +13,7 @@ import java.util.Map;
 public class NumberToWord {
     private Map<Integer, String> digitsMap;
     private Map<Integer, String> tensMap;
+    private Map<Integer, String> bigNumberMap;
 
     public NumberToWord(){
         // initialisation of digitsMap containing numbers less than 20
@@ -44,6 +49,9 @@ public class NumberToWord {
         tensMap.put(8, "eighty");
         tensMap.put(9, "ninety");
 
+        bigNumberMap = new HashMap<>();
+        bigNumberMap.put(1, "thousand");
+
     }
 
     private String handleThreeDigits(int number) {
@@ -65,7 +73,7 @@ public class NumberToWord {
 
     private String handleTwoDigits(int number){
         if (number < 20) {
-            return digitsMap.get(number);
+            return digitsMap.get(number)!=null?digitsMap.get(number):"";
         } else {
             int firstDigit, secondDigit;
             secondDigit = number % 10;
@@ -80,11 +88,35 @@ public class NumberToWord {
         }
     }
 
+
+
     public String toWord(int number){
-        if (number >= 100){
-            return handleThreeDigits(number);
+        //convert number into String separated by commas
+        //the idea is to format the number into comma delimited strings, each of max 3 digits
+        String numberFormatted = NumberFormat.getNumberInstance(Locale.UK).format(number);
+        StringBuilder stringBuilder = new StringBuilder();
+        String[] numberParts = numberFormatted.split(",");
+        int countOfParts = numberParts.length;
+        countOfParts--;
+        for(String str: numberParts) {
+            buildWord(stringBuilder, countOfParts, str);
+            countOfParts--;
+        }
+        return stringBuilder.toString().trim();
+
+    }
+
+    private void buildWord(StringBuilder stringBuilder, int countOfParts, String str) {
+        int numberStr = Integer.parseInt(str);
+        if (numberStr >= 100) {
+            stringBuilder.append(handleThreeDigits(numberStr));
         } else {
-            return handleTwoDigits(number);
+            stringBuilder.append(handleTwoDigits(numberStr));
+        }
+        if (numberStr > 0 && bigNumberMap.get(countOfParts)!=null) {
+            stringBuilder.append(" ")
+                    .append(bigNumberMap.get(countOfParts))
+                    .append(" ");
         }
     }
 }
