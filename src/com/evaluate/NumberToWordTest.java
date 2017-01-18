@@ -59,7 +59,7 @@ public class NumberToWordTest {
         numMap.put(69, "sixty nine");
         numMap.put(79, "seventy nine");
         numMap.put(89, "eighty nine");
-        numMap.put(99, "eighty nine");
+        numMap.put(99, "ninety nine");
         numMap.forEach((key,val) -> assertTrue(numberToWord.toWord(key).equals(val)));
     }
 
