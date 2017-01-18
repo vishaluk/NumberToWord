@@ -82,7 +82,7 @@ public class NumberToWordTest {
         numMap.put(112, "one hundred and twelve");
         numMap.put(113, "one hundred and thirteen");
         numMap.put(114, "one hundred and fourteen");
-        numMap.put(114, "one hundred and fifteen");
+        numMap.put(115, "one hundred and fifteen");
         numMap.put(116, "one hundred and sixteen");
         numMap.put(117, "one hundred and seventeen");
         numMap.put(118, "one hundred and eighteen");
