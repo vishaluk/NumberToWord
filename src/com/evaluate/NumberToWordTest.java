@@ -122,4 +122,12 @@ public class NumberToWordTest {
         numMap.forEach((key,val) -> assertTrue(numberToWord.toWord(key).equals(val)));
     }
 
+    @Test
+    public void testNumbersInThousands() {
+        NumberToWord numberToWord = new NumberToWord();
+        assertTrue(numberToWord.toWord(5145).equals("five thousand one hundred and forty-five"));
+        assertTrue(numberToWord.toWord(71000).equals("seventy one thousand"));
+        assertTrue(numberToWord.toWord(999999).equals("nine hundred and ninety-nine thousand nine hundred and ninety-nine"));
+    }
+
 }
