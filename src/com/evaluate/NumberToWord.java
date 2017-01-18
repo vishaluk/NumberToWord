@@ -36,6 +36,13 @@ public class NumberToWord {
         // initialisation of tens when number is greater than or equal to 20
         tensMap = new HashMap<>();
         tensMap.put(2, "twenty");
+        tensMap.put(3, "thirty");
+        tensMap.put(4, "forty");
+        tensMap.put(5, "fifty");
+        tensMap.put(6, "sixty");
+        tensMap.put(7, "seventy");
+        tensMap.put(8, "eighty");
+        tensMap.put(9, "ninety");
 
     }
 
