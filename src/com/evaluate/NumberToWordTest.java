@@ -12,6 +12,8 @@ import static org.junit.Assert.*;
  */
 public class NumberToWordTest {
 
+    private static final String CONVERSION_NOT_SUPPORTED = "conversion not supported";
+
     @Test
     public void testSingleDigits(){
         NumberToWord numberToWord = new NumberToWord();
@@ -139,6 +141,13 @@ public class NumberToWordTest {
         assertTrue(numberToWord.toWord(22100001).equals("twenty-two million one hundred thousand and one"));
         assertTrue(numberToWord.toWord(22100051).equals("twenty-two million one hundred thousand and fifty-one"));
         assertTrue(numberToWord.toWord(999999999).equals("nine hundred and ninety-nine million nine hundred and ninety-nine thousand nine hundred and ninety-nine"));
+    }
+    @Test
+    public void testNotSupportedConversion(){
+        NumberToWord numberToWord = new NumberToWord();
+        assertTrue(numberToWord.toWord(0).equals(CONVERSION_NOT_SUPPORTED));
+        assertTrue(numberToWord.toWord(-10000).equals(CONVERSION_NOT_SUPPORTED));
+        assertTrue(numberToWord.toWord(1000000000).equals(CONVERSION_NOT_SUPPORTED));
     }
 
 }
