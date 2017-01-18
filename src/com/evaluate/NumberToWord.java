@@ -73,7 +73,7 @@ public class NumberToWord {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(tensMap.get(firstDigit));
             if (digitsMap.get(secondDigit)!=null){
-                stringBuilder.append(" ")
+                stringBuilder.append("-")
                         .append(digitsMap.get(secondDigit));
             }
             return stringBuilder.toString();
