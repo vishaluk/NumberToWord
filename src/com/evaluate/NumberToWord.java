@@ -46,7 +46,24 @@ public class NumberToWord {
 
     }
 
-    public String toWord(int number){
+    private String handleThreeDigits(int number) {
+        StringBuilder stringBuilder = new StringBuilder();
+        int firstDigit = number/100;
+        stringBuilder
+                .append(digitsMap.get(firstDigit))
+                .append(" ")
+                .append("hundred");
+        if (number % 100 == 0) {
+            return stringBuilder.toString();
+        } else {
+            stringBuilder.append(" and ");
+            int lastTwoDigits = number % 100;
+            stringBuilder.append(handleTwoDigits(lastTwoDigits));
+            return stringBuilder.toString();
+        }
+    }
+
+    private String handleTwoDigits(int number){
         if (number < 20) {
             return digitsMap.get(number);
         } else {
@@ -60,6 +77,14 @@ public class NumberToWord {
                         .append(digitsMap.get(secondDigit));
             }
             return stringBuilder.toString();
+        }
+    }
+
+    public String toWord(int number){
+        if (number >= 100){
+            return handleThreeDigits(number);
+        } else {
+            return handleTwoDigits(number);
         }
     }
 }
