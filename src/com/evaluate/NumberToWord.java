@@ -9,6 +9,9 @@ import java.util.Map;
  * Created by vishalsharma on 18/01/2017.
  */
 public class NumberToWord {
+    public static final String CONVERSION_NOT_SUPPORTED = "conversion not supported";
+    public static final int UPPER_LIMIT = 1000000000;
+    public static final int LOWER_LIMIT = 0;
     private Map<Integer, String> digitsMap;
     private Map<Integer, String> tensMap;
     private Map<Integer, String> bigNumberMap;
@@ -90,19 +93,23 @@ public class NumberToWord {
 
 
     public String toWord(int number){
-        //convert number into String separated by commas
-        //the idea is to format the number into comma delimited strings, each of max 3 digits
-        String numberFormatted = NumberFormat.getNumberInstance(Locale.UK).format(number);
-        StringBuilder stringBuilder = new StringBuilder();
-        String[] numberParts = numberFormatted.split(",");
-        int countOfParts = numberParts.length;
-        boolean bigNumberPresent = countOfParts >1;
-        countOfParts--;
-        for(String str: numberParts) {
-            buildWord(stringBuilder, countOfParts, str, bigNumberPresent);
+        if (number > LOWER_LIMIT && number < UPPER_LIMIT) {
+            //convert number into String separated by commas
+            //the idea is to format the number into comma delimited strings, each of max 3 digits
+            String numberFormatted = NumberFormat.getNumberInstance(Locale.UK).format(number);
+            StringBuilder stringBuilder = new StringBuilder();
+            String[] numberParts = numberFormatted.split(",");
+            int countOfParts = numberParts.length;
+            boolean bigNumberPresent = countOfParts > 1;
             countOfParts--;
+            for (String str : numberParts) {
+                buildWord(stringBuilder, countOfParts, str, bigNumberPresent);
+                countOfParts--;
+            }
+            return stringBuilder.toString().trim();
+        } else {
+            return CONVERSION_NOT_SUPPORTED;
         }
-        return stringBuilder.toString().trim();
 
     }
 
