@@ -4,8 +4,6 @@ import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
 
 /**
  * Created by vishalsharma on 18/01/2017.
@@ -51,6 +49,7 @@ public class NumberToWord {
 
         bigNumberMap = new HashMap<>();
         bigNumberMap.put(1, "thousand");
+        bigNumberMap.put(2, "million");
 
     }
 
@@ -97,21 +96,27 @@ public class NumberToWord {
         StringBuilder stringBuilder = new StringBuilder();
         String[] numberParts = numberFormatted.split(",");
         int countOfParts = numberParts.length;
+        boolean bigNumberPresent = countOfParts >1;
         countOfParts--;
         for(String str: numberParts) {
-            buildWord(stringBuilder, countOfParts, str);
+            buildWord(stringBuilder, countOfParts, str, bigNumberPresent);
             countOfParts--;
         }
         return stringBuilder.toString().trim();
 
     }
 
-    private void buildWord(StringBuilder stringBuilder, int countOfParts, String str) {
+    private void buildWord(StringBuilder stringBuilder, int countOfParts, String str, boolean bigNumberPresent) {
         int numberStr = Integer.parseInt(str);
         if (numberStr >= 100) {
             stringBuilder.append(handleThreeDigits(numberStr));
         } else {
-            stringBuilder.append(handleTwoDigits(numberStr));
+            String partialWord = handleTwoDigits(numberStr);
+            // in case of terminating counter when thousands and millions are present
+            // we need to append and
+            if (partialWord.length()>0 && bigNumberPresent && countOfParts==0) stringBuilder.append("and ");
+            stringBuilder.append(partialWord);
+
         }
         if (numberStr > 0 && bigNumberMap.get(countOfParts)!=null) {
             stringBuilder.append(" ")
